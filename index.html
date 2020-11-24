@@ -4,29 +4,40 @@
     <title>Calculator</title>
     <!-- Core CSS -->
     <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="calculator-container">
-        <div class="display">
-            <p></p>
-        </div>
-        <div class="container">
-            <button id="clear" class="top-button">AC</button>
-            <button id="operator" class="top-button">+</button>
-            <button id="operator" class="top-button">-</button>
-            <button id="operator" class="top-button">/</button>
-            <button id="number">7</button>
-            <button id="number">8</button>
-            <button id="number">9</button>
-            <button id="operator">*</button>
-            <button id="number">4</button>
-            <button id="number">5</button>
-            <button id="number">6</button>
-            <button id="equal">=</button>
-            <button id="number">1</button>
-            <button id="number">2</button>
-            <button id="number">3</button>
-            <button id="number">0</button>
+    <div class="main-container">
+        <div class="calculator-container">
+            <div class="display">
+                <p></p>
+            </div>
+            <div class="container">
+                <button id="clear">AC</button>
+
+                <button id="operator" class="top-row">*</button>
+                <button id="operator" class="top-row">/</button>
+                <button id="operator" class="top-row">-</button>
+                <button id="backspace" class="top-row">bksp</button>
+
+                <button id="operator" class="plus-sign">+</button>
+                <button id="equal">=</button>
+
+                <button id="number">7</button>
+                <button id="number">8</button>
+                <button id="number">9</button>
+                <button id="number">4</button>
+                <button id="number">5</button>
+                <button id="number">6</button>
+                <button id="number">1</button>
+                <button id="number">2</button>
+                <button id="number">3</button>
+                <button id="number" class="zero">0</button>
+                <button id="number">.</button>
+                
+            </div>
         </div>
     </div>
     

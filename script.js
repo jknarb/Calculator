@@ -24,13 +24,14 @@ const displayContainer = document.querySelector(".display");
 const displayText = displayContainer.querySelector("p");
 const equals = document.getElementById("equal");
 const clearButton = document.getElementById("clear");
+const backspaceButton = document.getElementById("backspace");
 
 let toggle = false;
 let toCalc = [];
 let input = "";
 let textDisplay = "";
 
-numberButtons.forEach(button => button.addEventListener("click", function(){
+numberButtons.forEach(button => button.addEventListener("click", function(event){
 
     let number = button.textContent;
 
@@ -53,9 +54,9 @@ operateButton.forEach(button => button.addEventListener("click", function (){
 
     let operator = button.textContent
     console.log(toCalc.length);
-    
+
     if (toCalc.length != 1) {
-        toCalc.push(parseInt(input));
+        toCalc.push(parseFloat(input));
     } 
 
     if (toCalc.length == 3) {
@@ -115,7 +116,7 @@ operateButton.forEach(button => button.addEventListener("click", function (){
 
 equals.addEventListener("click",function() {
 
-    toCalc.push(parseInt(input));
+    toCalc.push(parseFloat(input));
     toCalc = toCalc.filter(Boolean);
     
     if (toCalc.length == 0) {
@@ -168,12 +169,29 @@ equals.addEventListener("click",function() {
 });
 
 clearButton.addEventListener("click", function(){
-
     input = "";
     displayCalc = [];
     toCalc = [];
     textDisplay = "";
     displayText.textContent = input;
 
+});
+
+
+
+backspaceButton.addEventListener("click", function(){
+
+    console.log(toCalc.length);
+
+    if (toCalc.length == 0) {
+        const toSliceInput = input;
+        input = toSliceInput.slice(0, -1);
+        displayText.textContent = input;
+    } else if (toCalc.length == 2) {
+        const toSliceTextDisplay = input;
+        input = toSliceTextDisplay.slice(0, -1);
+        displayText.textContent = textDisplay + input;
+    }
+    
 });
 
