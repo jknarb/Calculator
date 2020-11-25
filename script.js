@@ -1,3 +1,4 @@
+// numerical operation functions
 function addition (x,y) {
     return (x + y);
 };
@@ -18,26 +19,33 @@ function division (x,y) {
     }
 };
 
-const operateButton = document.querySelectorAll(`button[id="operator"]`);
-const numberButtons = document.querySelectorAll(`button[id="number"]`);
-const displayContainer = document.querySelector(".display");
-const displayText = displayContainer.querySelector("p");
-const equals = document.getElementById("equal");
-const clearButton = document.getElementById("clear");
-const backspaceButton = document.getElementById("backspace");
+// DOM Selectors
+const operateButton = document.querySelectorAll(`button[id="operator"]`); //Operator selector
+const numberButtons = document.querySelectorAll(`button[id="number"]`); // Number button selector
+const displayContainer = document.querySelector(".display"); // Display selector
+const displayText = displayContainer.querySelector("p"); // Display p element selector
+const equals = document.getElementById("equal"); // Equal button selector
+const clearButton = document.getElementById("clear"); //Clear button selector
+const backspaceButton = document.getElementById("backspace"); //Backspace button Selector
 
-let toggle = false;
+
+// Variable presets (empty)
+let toggle = false; //Toogle to differentiate between input already operated on/not operated on. To reset input for further calculations.
 let toCalc = [];
 let input = "";
 let textDisplay = "";
 
+
+// Event handler for number buttons
 numberButtons.forEach(button => button.addEventListener("click", function(event){
 
-    let number = button.textContent;
+    let number = button.textContent; //Capturing text of button clicked
 
-    if (toggle === false) {
-        input = input + number;
-        displayText.textContent = textDisplay + input;
+    //Check for input toggle states --> to reset and input new numerical data or further concatenation
+
+    if (toggle === false) { // False = number input has not passed operation stage. Input is not reset.
+        input = input + number; //Adding string to stored input.
+        displayText.textContent = textDisplay + input; // Displaying concatenated input stored in textDisplay + new input.
     } else {
         input = "";
         textDisplay = "";
@@ -50,14 +58,17 @@ numberButtons.forEach(button => button.addEventListener("click", function(event)
 
 }));
 
+
+//Event handler for operator buttons
 operateButton.forEach(button => button.addEventListener("click", function (){
 
     let operator = button.textContent
-    console.log(toCalc.length);
 
-    if (toCalc.length != 1) {
+    if (toCalc.length == 0 || toCalc.length == 2) {
         toCalc.push(parseFloat(input));
-    } 
+        toCalc = toCalc.filter(Boolean); //filter toCalc array for NaN to prevent operation on NaN.
+    }
+
 
     if (toCalc.length == 3) {
         let x = toCalc[0];
@@ -100,7 +111,8 @@ operateButton.forEach(button => button.addEventListener("click", function (){
         input = "";
         toggle = false;
 
-    } else {
+    //Check to only push operator if array lenght == 1. i.e. only push operator if theres only a number.
+    } else if (toCalc.length == 1) {
 
         toCalc.push(operator);
         textDisplay = toCalc.join(" ");
@@ -108,9 +120,7 @@ operateButton.forEach(button => button.addEventListener("click", function (){
         textDisplay = toCalc.join(" ") + " ";
         input = "";
         toggle = false;
-
     }
-
 
 }));
 

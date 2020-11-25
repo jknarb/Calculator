@@ -47,6 +47,8 @@ html, body {
     padding: 20px;
 }
 
+/* Display Styling */
+
 .display {
     font-weight: 600;
     background-color: honeydew;
@@ -61,6 +63,8 @@ html, body {
     line-height: 3em;
     margin-right: 20px;
 }
+
+/* Button Styling */
 
 #number, #operator {
     background-color: lightgrey;
