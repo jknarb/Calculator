@@ -12,10 +12,15 @@ function multiplication (x,y) {
 };
 
 function division (x,y) {
-    if (x != 0 && y != 0) {
-        return x / y;
+    if (y == 0) {
+        alert("Nah m8");
+        input = "";
+        displayCalc = [];
+        toCalc = [];
+        textDisplay = "";
+        displayText.textContent = input;
     } else {
-        return ("Nah m8");
+        return x / y;
     }
 };
 
@@ -41,19 +46,23 @@ numberButtons.forEach(button => button.addEventListener("click", function(event)
 
     let number = button.textContent; //Capturing text of button clicked
 
-    //Check for input toggle states --> to reset and input new numerical data or further concatenation
-
-    if (toggle === false) { // False = number input has not passed operation stage. Input is not reset.
-        input = input + number; //Adding string to stored input.
-        displayText.textContent = textDisplay + input; // Displaying concatenated input stored in textDisplay + new input.
+    // 1. Check for more than one decimal + alert if already has 1 in input string.
+    // 2.Check for input toggle states --> to reset and input new numerical data or further concatenation.
+    if (input.includes(".") == true && number == ".") {
+        alert("You can only have use 1 decimal I'm afraid. LOL noob.")
     } else {
-        input = "";
-        textDisplay = "";
-        displayText.textContent = textDisplay + input;
-        input = input + number;
-        displayText.textContent = textDisplay + input;
-        toCalc = [];
-        toggle = false;
+        if (toggle === false) { // False = number input has not passed operation stage. Input is not reset.
+            input = input + number; //Adding string to stored input.
+            displayText.textContent = textDisplay + input; // Displaying concatenated input stored in textDisplay + new input.
+        } else {
+            input = "";
+            textDisplay = "";
+            displayText.textContent = textDisplay + input;
+            input = input + number;
+            displayText.textContent = textDisplay + input;
+            toCalc = [];
+            toggle = false;
+        }
     }
 
 }));
@@ -69,11 +78,16 @@ operateButton.forEach(button => button.addEventListener("click", function (){
         toCalc = toCalc.filter(Boolean); //filter toCalc array for NaN to prevent operation on NaN.
     }
 
-
     if (toCalc.length == 3) {
         let x = toCalc[0];
         let y = toCalc[2];
         let oper = toCalc[1];
+
+        if ( y === void undefined ) {
+            y = 0;
+        } else if (x === void undefined) {
+            x = 0;
+        }
 
         switch (oper) {
             case "+":
@@ -130,14 +144,18 @@ equals.addEventListener("click",function() {
     toCalc = toCalc.filter(Boolean);
     
     if (toCalc.length == 0) {
-
         alert("M8 you havent even pressed a numba. Whadda fok bru?");
-        
     } else {
 
         let x = toCalc[0];
         let y = toCalc[2];
         let oper = toCalc[1];
+        
+        if ( y === void undefined ) {
+            y = 0;
+        } else if (x === void undefined) {
+            x = 0;
+        }
 
         switch (oper) {
             case "+":
@@ -161,7 +179,7 @@ equals.addEventListener("click",function() {
             case "/":
                 toCalc = [];
                 toCalc.push(division(x,y));
-                console.log(toCalc)
+                console.log(toCalc);
                 break;  
                 
             default:
